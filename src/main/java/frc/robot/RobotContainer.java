@@ -9,8 +9,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.WheelRotatePanel;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Wheel;
+import frc.robot.utilities.ColorSensor;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -25,7 +29,8 @@ public class RobotContainer {
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-
+  private final ColorSensor colorSensor = new ColorSensor();
+  private final Wheel wheel = new Wheel(colorSensor);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -33,6 +38,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    SmartDashboard.putData("WheelRotatePanel(6)", new WheelRotatePanel(6, wheel, colorSensor));
   }
 
   /**
